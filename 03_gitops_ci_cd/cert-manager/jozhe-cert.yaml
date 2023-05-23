@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: jozhe.com-cert
+  namespace: intro-k8s
+spec:
+  secretName: jozhe.com-cert
+  issuerRef:
+    name: letsencrypt-intro-k8s
+  dnsNames:
+    - '*.jozhe.com'
+    - jozhe.com

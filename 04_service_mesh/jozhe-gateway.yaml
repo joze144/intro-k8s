@@ -1,0 +1,26 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: jozhe-gateway
+  namespace: istio-system
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "jozhe.com"
+        - "*.jozhe.com"
+    - port:
+        number: 443
+        name: https-443
+        protocol: HTTPS
+      hosts:
+        - "jozhe.com"
+        - "*.jozhe.com"
+      tls:
+        mode: SIMPLE # enables HTTPS on this port
+        credentialName: jozhe.com-cert # fetches certs from Kubernetes secret

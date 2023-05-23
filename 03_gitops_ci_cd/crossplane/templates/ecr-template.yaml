@@ -1,0 +1,12 @@
+apiVersion: ecr.aws.upbound.io/v1beta1
+kind: Repository
+metadata:
+  name: ecr-name
+  labels:
+    region: us-west-2
+spec:
+  forProvider:
+    region: us-west-2
+    imageTagMutability: MUTABLE
+  providerConfigRef:
+    name: default

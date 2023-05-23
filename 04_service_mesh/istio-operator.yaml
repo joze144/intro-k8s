@@ -1,0 +1,26 @@
+apiVersion: install.istio.io/v1alpha2
+kind: IstioOperator
+spec:
+  profile: default
+  meshConfig:
+    enableTracing: true
+    rootNamespace: istio-system
+    trustDomain: cluster.local
+    enablePrometheusMerge: true
+
+    defaultConfig:
+      discoveryAddress: istiod.istio-system.svc:15012
+      tracing:
+        zipkin:
+          address: zipkin.istio-system:9411
+
+    extensionProviders:
+      - name: otel
+        envoyOtelAls:
+          service: opentelemetry-collector.istio-system.svc.cluster.local
+          port: 4317
+
+    defaultProviders:
+      accessLogging:
+        - envoy
+        - otel

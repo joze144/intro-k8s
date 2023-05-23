@@ -1,0 +1,20 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: letsencrypt-intro-k8s
+  namespace: intro-k8s
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: me@jozhe.com
+
+    privateKeySecretRef:
+      name: letsencrypt-intro-k8s
+
+    solvers:
+      - dns01:
+          acmeDNS:
+            host: https://auth.acme-dns.io
+            accountSecretRef:
+              name: acme-dns
+              key: acmedns.json
